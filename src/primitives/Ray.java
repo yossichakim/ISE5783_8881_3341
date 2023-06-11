@@ -11,6 +11,12 @@ import geometries.Intersectable.GeoPoint;
  * A ray is defined by a starting point and a direction vector.
  */
 public class Ray {
+
+    /**
+     *constant for ray
+     */
+    private static final double DELTA = 0.1;
+
     /**
      * The starting point of the ray.
      */
@@ -48,6 +54,19 @@ public class Ray {
     public Ray(Point p0, Vector dir) {
         this.p0 = p0;
         this.dir = dir.normalize();
+    }
+
+    /**
+     * Constructor that moves the ray by DELTA
+     *
+     * @param p0 point
+     * @param direction direction (must be normalized)
+     * @param normal normal
+     */
+    public Ray(Point p0, Vector direction, Vector normal) {
+        Vector delta = normal.scale(normal.dotProduct(direction) > 0 ? DELTA : - DELTA);
+        this.p0 = p0.add(delta);
+        this.dir = direction;
     }
 
 
