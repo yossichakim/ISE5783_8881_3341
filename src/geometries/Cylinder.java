@@ -4,8 +4,10 @@ import primitives.Point;
 import primitives.Ray;
 import primitives.Vector;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import static primitives.Util.alignZero;
 import static primitives.Util.isZero;
 
 /**
@@ -31,6 +33,17 @@ public class Cylinder extends Tube {
         super(radius, axisRay);
         this.height = height;
     }
+
+    /**
+     * getter function for height
+     *
+     * @return height
+     */
+    public double getHeight() {
+        return height;
+    }
+
+
 
     /**
      * Returns the normal to the cylinder surface at a given point.
@@ -59,6 +72,23 @@ public class Cylinder extends Tube {
      */
     @Override
     public List<GeoPoint> findGeoIntersectionsHelper(Ray ray) {
-        return null;
+        List<GeoPoint> res = new ArrayList<>();
+        List<GeoPoint> lst = super.findGeoIntersectionsHelper(ray);
+        if (lst != null)
+            for (GeoPoint geoPoint : lst) {
+                double distance = alignZero(geoPoint.point.subtract(axisRay.getP0()).dotProduct(axisRay.getDir()));
+                if (distance > 0 && distance <= height)
+                    res.add(geoPoint);
+            }
+
+        if (res.size() == 0)
+            return null;
+        return res;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return (obj instanceof Cylinder) &&
+                super.equals(obj)&&  this.height == ((Cylinder) obj).height;
     }
 }
