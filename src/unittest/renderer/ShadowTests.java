@@ -104,4 +104,133 @@ public class ShadowTests {
          .writeToImage();
    }
 
+
+    @Test
+    public void sphereInBox() {
+        scene.setAmbientLight(new AmbientLight(new Color(WHITE), new Double3(0.15)));
+
+        // Define the polygons
+        Polygon bottom = new Polygon(
+                new Point(-100, -87, -500),
+                new Point(100, -87, -500),
+                new Point(100, -90, -210),
+                new Point(-100, -90, -210)
+        );
+
+        Polygon top = new Polygon(
+                new Point(-100, 87, -500),
+                new Point(100, 87, -500),
+                new Point(100, 90, -210),
+                new Point(-100, 90, -210)
+        );
+
+        Polygon left = new Polygon(
+                new Point(-100, -87, -500),
+                new Point(-100, 87, -500),
+                new Point(-100, 90, -210),
+                new Point(-100, -90, -210)
+        );
+
+        Polygon right = new Polygon(
+                new Point(100, -87, -500),
+                new Point(100, 87, -500),
+                new Point(100, 90, -210),
+                new Point(100, -90, -210)
+        );
+
+        Polygon back = new Polygon(
+                new Point(-100, -87, -500),
+                new Point(100, -87, -500),
+                new Point(100, 87, -500),
+                new Point(-100, 87, -500)
+        );
+
+        // Set the properties of the polygons
+        bottom.setMaterial(new Material().setKt(0).setKr(0.5)).setEmission(new Color(GREEN));
+        top.setMaterial(new Material().setKt(0).setKr(0)).setEmission(new Color(BLUE));
+        left.setMaterial(new Material().setKt(0.5).setKr(0.2)).setEmission(new Color(YELLOW));
+        right.setMaterial(new Material().setKt(0.5).setKr(0.2)).setEmission(new Color(GREEN));
+        back.setMaterial(new Material().setKt(0.5).setKr(0.2)).setEmission(new Color(BLACK));
+
+        // Create the sphere
+        Sphere sphere = new Sphere(80, new Point(0, 0, -300));
+        sphere.setEmission(new Color(RED))
+                .setMaterial(new Material().setKd(0.5).setKs(0.5).setShininess(30));
+
+        // Add the geometries to the scene
+        scene.geometries.add(bottom, top, left, right, back, sphere);
+
+        // Define the lights
+        scene.lights.add(
+                new SpotLight(new Color(500, 500, 500), new Point(0, 200, -100), new Vector(0, -1, -2))
+                        .setKl(1E-4).setKq(1E-5)
+        );
+
+        // Set up the camera
+        camera.setImageWriter(new ImageWriter("sphereInBox", 600, 600))
+                .renderImage()
+                .writeToImage();
+    }
+
+    @Test
+    public void spherePyramid() {
+        scene.setAmbientLight(new AmbientLight(new Color(WHITE), new Double3(0.15)));
+
+        // Create the plane
+        Polygon bottom = new Polygon(
+                new Point(-130, -70, -500),
+                new Point(130, -70, -500),
+                new Point(100, -100, -200),
+                new Point(-100, -100, -200)
+        );
+
+        bottom.setMaterial(new Material().setKd(0.5).setKs(0.5).setKr(0.5).setKt(0.5)).setEmission(new Color(BLUE));
+        scene.geometries.add(bottom);
+
+        // Define the pyramid parameters
+        double pyramidCenterX = 0;
+        double pyramidCenterY = 0;
+        double pyramidCenterZ = -500;
+        double pyramidHeight = 6;
+        double sphereRadius = 10;
+        double sphereSpacing = 10;
+
+        // Create the spheres in a pyramid shape
+        for (int i = 0; i < pyramidHeight; i++) {
+            int spheresInLayer = i + 1;
+            double layerOffset = -(pyramidHeight - 1) * (sphereRadius + sphereSpacing) / 2 + i * (sphereRadius + sphereSpacing);
+            double planeOffset = (spheresInLayer - 1) * (sphereRadius + sphereSpacing) / 2;
+
+            for (int j = 0; j < spheresInLayer; j++) {
+                double sphereX = pyramidCenterX + j * (2 * sphereRadius + sphereSpacing) - planeOffset;
+                double sphereY = pyramidCenterY + layerOffset;
+                double sphereZ = pyramidCenterZ + i * (2 * sphereRadius + sphereSpacing);
+
+                Sphere sphere = new Sphere(sphereRadius, new Point(sphereX, sphereY, sphereZ));
+                sphere.setEmission(new Color(RED))
+                        .setMaterial(new Material().setKd(0.5).setKs(0.5).setShininess(30));
+
+                scene.geometries.add(sphere);
+            }
+        }
+
+        // Define the lights
+        scene.lights.add(
+                new SpotLight(new Color(500, 500, 500), new Point(0, 200, -100), new Vector(0, -1, -2))
+                        .setKl(1E-4).setKq(1E-5)
+        );
+
+        // Set up the camera
+        camera.setImageWriter(new ImageWriter("spherePyramid", 600, 600))
+                .renderImage()
+                .writeToImage();
+    }
+
+
+
+
+
+
+
+
 }
