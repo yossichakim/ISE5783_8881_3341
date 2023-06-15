@@ -48,13 +48,14 @@ public class FinalImage {
 
         var MaterialToRoom = new Material().setKd(0.7).setKs(0.3);
 
+        //floor
         Point A = new Point(-70, -70, 300);
         Point B = new Point(70, -70, 300);
         Point C = new Point(70, -70, -400);
         Point D = new Point(-70, -70, -400);
 
         var floor = new Polygon(A, B, C, D);
-        floor.setEmission(new Color(255,218,179)).setMaterial(MaterialToRoom);
+        floor.setEmission(new Color(255, 218, 179)).setMaterial(MaterialToRoom);
         scene.geometries.add(floor);
 
 
@@ -76,39 +77,27 @@ public class FinalImage {
                     Point p4 = new Point(x + 10, Y, z);
 
                     Polygon polygon = new Polygon(p1, p2, p3, p4);
-                            polygon.setEmission(new Color(BLACK))
-                            .setMaterial(MaterialToRoom);
+                    polygon.setEmission(new Color(BLACK)).setMaterial(MaterialToRoom);
 
                     scene.geometries.add(polygon);
                 }
             }
-
         }
+        //end of floor
 
 
-        scene.geometries.add( //
+        scene.geometries.add(
                 //left wall
-                new Polygon(new Point(-70, 70, 300), new Point(-70, -70, 300), new Point(-70, -70, -400), new Point(-70, 70, -400)).
-                        setEmission(new Color(235, 206, 91).reduce(2)) //
+                new Polygon(new Point(-70, 70, 300), new Point(-70, -70, 300), new Point(-70, -70, -400), new Point(-70, 70, -400)).setEmission(new Color(235, 206, 91).reduce(2)) //
                         .setMaterial(MaterialToRoom),
                 //ceiling
-                new Polygon(new Point(70, 70, 300), new Point(-70, 70, 300), new Point(-70, 70, -400), new Point(70, 70, -400)).
-                        setEmission(new Color(223, 209, 163).reduce(3)) //
+                new Polygon(new Point(70, 70, 300), new Point(-70, 70, 300), new Point(-70, 70, -400), new Point(70, 70, -400)).setEmission(new Color(223, 209, 163).reduce(3)) //
                         .setMaterial(MaterialToRoom.setShininess(100)),
                 //right wall
-                new Polygon(new Point(70, -70, 300), new Point(70, 70, 300), new Point(70, 70, -400), new Point(70, -70, -400)).
-                        setEmission(new Color(235, 206, 91).reduce(2)) //
+                new Polygon(new Point(70, -70, 300), new Point(70, 70, 300), new Point(70, 70, -400), new Point(70, -70, -400)).setEmission(new Color(235, 206, 91).reduce(2)) //
                         .setMaterial(MaterialToRoom.setShininess(100)),
-                // floor
-/*                new Polygon(new Point(-70, -70, 300), new Point(70, -70, 300), new Point(70, -70, -400), new Point(-70, -70, -400)).
-                        setEmission(new Color(223, 209, 163).reduce(3)) //
-                        .setMaterial(new Material().setKd(0.7).setKs(0.3).setShininess(100)),*/
-
-
-
                 // back wall
-                new Polygon(new Point(70, 70, -400), new Point(-70, 70, -400), new Point(-70, -70, -400), new Point(70, -70, -400)).
-                        setEmission(new Color(235, 206, 91).reduce(2.5)) //
+                new Polygon(new Point(70, 70, -400), new Point(-70, 70, -400), new Point(-70, -70, -400), new Point(70, -70, -400)).setEmission(new Color(235, 206, 91).reduce(2.5)) //
                         .setMaterial(new Material().setKs(0.3).setKr(0.5).setShininess(100))
 
         );
@@ -134,25 +123,17 @@ public class FinalImage {
 
         scene.addLight(new DirectionalLight(new Color(255, 100, 100).reduce(6), new Vector(0, -0.3, -1)));
 
-        scene.geometries.add(new Sphere(3, lamp1).setEmission(new Color(white))
-                .setMaterial(new Material().setKt(0.9).setShininess(100)));
+        scene.geometries.add(new Sphere(3, lamp1).setEmission(new Color(white)).setMaterial(new Material().setKt(0.9).setShininess(100)));
 
-        scene.geometries.add(new Sphere(3, lamp2).setEmission(new Color(white))
-                .setMaterial(new Material().setKt(0.9).setShininess(100)));
+        scene.geometries.add(new Sphere(3, lamp2).setEmission(new Color(white)).setMaterial(new Material().setKt(0.9).setShininess(100)));
 
-        scene.geometries.add(new Sphere(7, lamp1Case).setEmission(new Color(255, 100, 100))
-                .setMaterial(new Material().setKt(0.6).setShininess(100)));
+        scene.geometries.add(new Sphere(7, lamp1Case).setEmission(new Color(255, 100, 100)).setMaterial(new Material().setKt(0.6).setShininess(100)));
 
-        scene.geometries.add(new Sphere(7, lamp2Case).setEmission(new Color(255, 100, 100))
-                .setMaterial(new Material().setKt(0.6).setShininess(100)));
+        scene.geometries.add(new Sphere(7, lamp2Case).setEmission(new Color(255, 100, 100)).setMaterial(new Material().setKt(0.6).setShininess(100)));
 
-        scene.geometries.add(new Cylinder(0.5, new Ray(lamp1Case.add(new Vector(0, 7, 0)), new Vector(0, 1, 0)), 50).
-                setEmission(new Color(153,76,0))
-                .setMaterial(new Material().setKs(1).setKd(0.4).setShininess(100)));
+        scene.geometries.add(new Cylinder(0.5, new Ray(lamp1Case.add(new Vector(0, 7, 0)), new Vector(0, 1, 0)), 50).setEmission(new Color(153, 76, 0)).setMaterial(new Material().setKs(1).setKd(0.4).setShininess(100)));
 
-        scene.geometries.add(new Cylinder(0.5, new Ray(lamp2Case.add(new Vector(0, 7, 0)), new Vector(0, 1, 0)), 50).
-                setEmission(new Color(153,76,0))
-                .setMaterial(new Material().setKs(1).setKd(0.4).setShininess(100)));
+        scene.geometries.add(new Cylinder(0.5, new Ray(lamp2Case.add(new Vector(0, 7, 0)), new Vector(0, 1, 0)), 50).setEmission(new Color(153, 76, 0)).setMaterial(new Material().setKs(1).setKd(0.4).setShininess(100)));
 
 
     }
@@ -171,32 +152,12 @@ public class FinalImage {
         Point G = new Point(20, -23, 100);
         Point H = new Point(20, -23, 600);
 
-        scene.geometries.add(
-                new Polygon(A, B, C, D).setEmission(new Color(75, 61, 4))
-                        .setMaterial(new Material().setKd(0.7).setKs(0.3)),
-                new Polygon(E, F, G, H).setEmission(new Color(75, 61, 4))
-                        .setMaterial(new Material().setKd(0.7).setKs(0.3)),
-                new Polygon(A, B, F, E).setEmission(new Color(75, 61, 4))
-                        .setMaterial(new Material().setKd(0.7).setKs(0.3)),
-                new Polygon(C, D, H, G).setEmission(new Color(75, 61, 4))
-                        .setMaterial(new Material().setKd(0.7).setKs(0.3)),
-                new Polygon(A, E, H, D).setEmission(new Color(75, 61, 4))
-                        .setMaterial(new Material().setKd(0.7).setKs(0.3)),
-                new Polygon(B, F, G, C).setEmission(new Color(75, 61, 4))
-                        .setMaterial(new Material().setKd(0.7).setKs(0.3))
+        scene.geometries.add(new Polygon(A, B, C, D).setEmission(new Color(75, 61, 4)).setMaterial(new Material().setKd(0.7).setKs(0.3)), new Polygon(E, F, G, H).setEmission(new Color(75, 61, 4)).setMaterial(new Material().setKd(0.7).setKs(0.3)), new Polygon(A, B, F, E).setEmission(new Color(75, 61, 4)).setMaterial(new Material().setKd(0.7).setKs(0.3)), new Polygon(C, D, H, G).setEmission(new Color(75, 61, 4)).setMaterial(new Material().setKd(0.7).setKs(0.3)), new Polygon(A, E, H, D).setEmission(new Color(75, 61, 4)).setMaterial(new Material().setKd(0.7).setKs(0.3)), new Polygon(B, F, G, C).setEmission(new Color(75, 61, 4)).setMaterial(new Material().setKd(0.7).setKs(0.3))
 
         );
 
         //add table feet
-        scene.geometries.add(
-                new Cylinder(2,new Ray(E.add(new Vector(5, 0, -5)), new Vector(0, -1, 0)), 40)
-                        .setEmission(new Color(75, 61, 4)).setMaterial(new Material().setKd(0.7).setKs(0.3)),
-                new Cylinder(2,new Ray(F.add(new Vector(5, 0, 10)), new Vector(0, -1, 0)), 100)
-                        .setEmission(new Color(75, 61, 4)).setMaterial(new Material().setKd(0.7).setKs(0.3)),
-                new Cylinder(2,new Ray(G.add(new Vector(-5, 0, 10)), new Vector(0, -1, 0)), 100)
-                        .setEmission(new Color(75, 61, 4)).setMaterial(new Material().setKd(0.7).setKs(0.3)),
-                new Cylinder(2,new Ray(H.add(new Vector(-5, 0, -5)), new Vector(0, -1, 0)), 40)
-                        .setEmission(new Color(75, 61, 4)).setMaterial(new Material().setKd(0.7).setKs(0.3))
+        scene.geometries.add(new Cylinder(2, new Ray(E.add(new Vector(5, 0, -5)), new Vector(0, -1, 0)), 40).setEmission(new Color(75, 61, 4)).setMaterial(new Material().setKd(0.7).setKs(0.3)), new Cylinder(2, new Ray(F.add(new Vector(5, 0, 10)), new Vector(0, -1, 0)), 100).setEmission(new Color(75, 61, 4)).setMaterial(new Material().setKd(0.7).setKs(0.3)), new Cylinder(2, new Ray(G.add(new Vector(-5, 0, 10)), new Vector(0, -1, 0)), 100).setEmission(new Color(75, 61, 4)).setMaterial(new Material().setKd(0.7).setKs(0.3)), new Cylinder(2, new Ray(H.add(new Vector(-5, 0, -5)), new Vector(0, -1, 0)), 40).setEmission(new Color(75, 61, 4)).setMaterial(new Material().setKd(0.7).setKs(0.3))
 
         );
 
@@ -224,14 +185,7 @@ public class FinalImage {
         for (double i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
                 if ((i + j) % 2 == 0) {
-                    scene.geometries.add(
-                            new Polygon(new Point(i * 2.5 - 10, y, j * 25 + 300),
-                                    new Point(i * 2.5 - 10, y, j * 25 + 300 + 25),
-                                    new Point(i * 2.5 + 2.5 - 10, y, j * 25 + 300 + 25),
-                                    new Point(i * 2.5 + 2.5 - 10, y, j * 25 + 300)
-                            ).setEmission(new Color(BLACK))
-                                    .setMaterial(new Material().setKd(0.7).setKs(0.3))
-                    );
+                    scene.geometries.add(new Polygon(new Point(i * 2.5 - 10, y, j * 25 + 300), new Point(i * 2.5 - 10, y, j * 25 + 300 + 25), new Point(i * 2.5 + 2.5 - 10, y, j * 25 + 300 + 25), new Point(i * 2.5 + 2.5 - 10, y, j * 25 + 300)).setEmission(new Color(BLACK)).setMaterial(new Material().setKd(0.7).setKs(0.3)));
                 }
 
             }
@@ -240,11 +194,7 @@ public class FinalImage {
         //create black board pieces
         for (int i = 1; i < 3; i++) {
             for (int j = 0; j < 8; j++) {
-                scene.geometries.add(
-                        new Sphere(0.8,new Point(i * 2.5 - 11.25, y, j * 25 + 300 + 13.75))
-                                .setEmission(new Color(BLACK))
-                                .setMaterial(new Material().setKd(0.7).setKs(0.3))
-                );
+                scene.geometries.add(new Sphere(0.8, new Point(i * 2.5 - 11.25, y, j * 25 + 300 + 13.75)).setEmission(new Color(BLACK)).setMaterial(new Material().setKd(0.7).setKs(0.3)));
 
             }
         }
@@ -252,11 +202,7 @@ public class FinalImage {
         //create white board pieces
         for (int i = 7; i < 9; i++) {
             for (int j = 0; j < 8; j++) {
-                scene.geometries.add(
-                        new Sphere(0.8,new Point(i * 2.5 - 11.25, y, j * 25 + 300 + 13.75))
-                                .setEmission(new Color(235, 206, 91))
-                                .setMaterial(new Material().setKd(0.7).setKs(0.3))
-                );
+                scene.geometries.add(new Sphere(0.8, new Point(i * 2.5 - 11.25, y, j * 25 + 300 + 13.75)).setEmission(new Color(235, 206, 91)).setMaterial(new Material().setKd(0.7).setKs(0.3)));
 
             }
         }

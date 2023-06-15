@@ -3,23 +3,22 @@
  */
 package renderer;
 
-import static java.awt.Color.*;
-
-import org.junit.jupiter.api.Test;
-
 import geometries.Sphere;
 import geometries.Triangle;
 import lighting.AmbientLight;
 import lighting.SpotLight;
+import org.junit.jupiter.api.Test;
 import primitives.*;
 import scene.Scene;
+
+import static java.awt.Color.*;
 
 /** Tests for reflection and transparency functionality, test for partial
  * shadows
  * (with transparency)
  * @author dzilb */
 public class ReflectionRefractionTests {
-   private Scene scene = new Scene("Test scene");
+   private final Scene scene = new Scene("Test scene");
 
    /** Produce a picture of a sphere lighted by a spot light */
    @Test

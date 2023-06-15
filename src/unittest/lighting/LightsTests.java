@@ -1,14 +1,17 @@
 package lighting;
 
-import static java.awt.Color.*;
-
+import geometries.Geometry;
+import geometries.Sphere;
+import geometries.Triangle;
 import org.junit.jupiter.api.Test;
-
-import geometries.*;
-import lighting.*;
 import primitives.*;
-import renderer.*;
+import renderer.Camera;
+import renderer.ImageWriter;
+import renderer.RayTracerBasic;
 import scene.Scene;
+
+import static java.awt.Color.BLUE;
+import static java.awt.Color.WHITE;
 
 /** Test rendering a basic image
  * @author Dan */
@@ -62,11 +65,11 @@ public class LightsTests {
    private final Geometry       triangle2               = new Triangle(vertices[0], vertices[1], vertices[3])
       .setMaterial(material);
 
-   private Point trPL = new Point(30, 10, -100); // Triangles test Position of Light
-   private Point spPL = new Point(-50, -50, 25); // Sphere test Position of Light
-   private Color trCL = new Color(800, 500, 250); // Triangles test Color of Light
-   private Color spCL = new Color(800, 500, 0); // Sphere test Color of Light
-   private Vector trDL = new Vector(-2, -2, -2); // Triangles test Direction of Light
+   private final Point trPL = new Point(30, 10, -100); // Triangles test Position of Light
+   private final Point spPL = new Point(-50, -50, 25); // Sphere test Position of Light
+   private final Color trCL = new Color(800, 500, 250); // Triangles test Color of Light
+   private final Color spCL = new Color(800, 500, 0); // Sphere test Color of Light
+   private final Vector trDL = new Vector(-2, -2, -2); // Triangles test Direction of Light
 
    /** Produce a picture of a sphere lighted by a directional light */
    @Test
