@@ -16,7 +16,7 @@ import static java.awt.Color.*;
 /**
  * Class to render final image
  */
-public class FinalImage {
+public class ImageForStage7 {
 
     private final Scene scene = new Scene("Test scene");
     private final Camera camera = new Camera(new Point(0, 0, 1000), new Vector(0, 0, -1), new Vector(0, 1, 0)) //
