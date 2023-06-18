@@ -16,7 +16,7 @@ import static java.awt.Color.*;
 /**
  * Class to render final image
  */
-public class ImageForStage7 {
+public class ImageForStage7Test {
 
     private final Scene scene = new Scene("Test scene");
     private final Camera camera = new Camera(new Point(0, 0, 1000), new Vector(0, 0, -1), new Vector(0, 1, 0)) //
@@ -34,8 +34,9 @@ public class ImageForStage7 {
         createTable();
         createChess();
         scene.setAmbientLight(new AmbientLight(new Color(white), new Double3(0.1)));
-        camera.setImageWriter(new ImageWriter("FinalImage", 500, 500)) //
+        camera.setImageWriter(new ImageWriter("FinalImage", 1000, 1000)) //
                 .setRayTracer(new RayTracerBasic(scene)) //
+                .setMultiThreading(-1).setDebugPrint(100) //
                 .renderImage() //
                 .writeToImage();
 
