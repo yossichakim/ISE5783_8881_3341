@@ -1,10 +1,10 @@
 package primitives;
 
+import geometries.Intersectable.GeoPoint;
+
 import java.util.List;
 
 import static primitives.Util.isZero;
-
-import geometries.Intersectable.GeoPoint;
 
 /**
  * Ray class represents a ray in a 3D Cartesian coordinate system.
@@ -66,7 +66,7 @@ public class Ray {
     public Ray(Point p0, Vector direction, Vector normal) {
         Vector delta = normal.scale(normal.dotProduct(direction) > 0 ? DELTA : - DELTA);
         this.p0 = p0.add(delta);
-        this.dir = direction;
+        this.dir = direction.normalize();
     }
 
 

@@ -198,21 +198,32 @@ public class RayTracerBasic extends RayTracerBase {
      * @return transparency value
      */
     private Double3 transparency(GeoPoint geoPoint, LightSource lightSource, Vector l, Vector n) {
-        Vector lightDirection = l.scale(-1); // from point to light source
-        Ray lightRay = new Ray(geoPoint.point, lightDirection, n);
-        List<GeoPoint> intersections = scene.geometries.findGeoIntersections(lightRay);
+        List<Point> grid = lightSource.getGrid(l);
+        if (grid == null) {
+            grid = List.of(geoPoint.point.add(l.scale(-1)));
+        }
 
-        Double3 ktr = Double3.ONE;
-        if (intersections == null) return ktr;
-
-        double distance = lightSource.getDistance(geoPoint.point);
-        for (GeoPoint intersection : intersections) {
-            if (distance > intersection.point.distance(geoPoint.point)) {
-                ktr = ktr.product(intersection.geometry.getMaterial().kT);
-                if (ktr.lowerThan(MIN_CALC_COLOR_K)) return Double3.ZERO;
+        Double3 ktr = Double3.ZERO;
+        int counter = 0;
+        for (Point p : grid) {
+            List<GeoPoint> intersections = scene.geometries.findGeoIntersections(new Ray(geoPoint.point, p.subtract(geoPoint.point).normalize(),  n));
+            if (intersections == null) {
+                ktr = ktr.add(Double3.ONE);
+                counter++;
+            } else {
+                double lightDistance = lightSource.getDistance(geoPoint.point);
+                for (GeoPoint gp : intersections) {
+                    if (Util.alignZero(gp.point.distance(geoPoint.point) - lightDistance) <= 0) {
+                        ktr = ktr.add(gp.geometry.getMaterial().kT);
+                        counter++;
+                    } else {
+                        ktr = ktr.add(Double3.ONE);
+                        counter++;
+                    }
+                }
             }
         }
-        return ktr;
+        return ktr.scale(1.0 / counter).lowerThan(MIN_CALC_COLOR_K) ? Double3.ZERO : ktr.scale(1.0 / counter);
     }
 
     /**

@@ -187,6 +187,18 @@ public class LightsTests {
               .writeToImage(); //
    }
 
+
+
+
+
+
+
+
+
+
+
+
+
 //   /** Produce a picture of a sphere lighted by a narrow spotlight */
 //   @Test
 //   public void sphereSpotSharp() {

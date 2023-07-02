@@ -4,6 +4,7 @@ import primitives.Color;
 import primitives.Point;
 import primitives.Vector;
 
+import java.util.List;
 /**
  * LightSource interface represents a light source in a scene.
  */
@@ -32,4 +33,12 @@ public interface LightSource {
      * @return distance of the light source
      */
     double getDistance(Point point);
+
+    /**
+     * returns a list of points that represent a grid of the light source
+     *
+     * @param v vector of the light source to the point on the geometry
+     * @return list of points that represent a grid of the light source
+     */
+    List<Point> getGrid(Vector v);
 }

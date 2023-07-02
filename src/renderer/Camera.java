@@ -24,7 +24,6 @@ public class Camera {
     private double width;
     private double height;
     private double distance;
-
     private ImageWriter imageWriter;
     private RayTracerBase rayTracer;
     private double printInterval;
@@ -45,6 +44,11 @@ public class Camera {
         this.vRight = vTo.crossProduct(vUp).normalize();
     }
 
+    /**
+     * Sets number of threads.
+     * @param threads number of threads
+     * @return the number of threads
+     */
     public Camera setMultiThreading(int threads) {
         if (threads < -2)
             throw new MissingResourceException("threads must be >= 1 or -2 for default or -1 for streaming", "Camera", "threads");
@@ -57,6 +61,12 @@ public class Camera {
         return this;
     }
 
+    /**
+     * Sets debug printing on.
+     *
+     * @param interval the interval
+     * @return the debug print
+     */
     public Camera setDebugPrint(double interval) {
         printInterval = interval;
         return this;
